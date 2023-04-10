@@ -6,23 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Title.unity
+    path: Assets/CardGame/Scenes/Title.unity
     guid: 01a540839c42cb24c91a4d3482a6a33e
   - enabled: 1
-    path: Assets/Scenes/Lobby.unity
+    path: Assets/CardGame/Scenes/Lobby.unity
     guid: 4382ab5cf2e3c2040b7f605e8ff92be3
   - enabled: 1
-    path: Assets/Scenes/Loading.unity
+    path: Assets/CardGame/Scenes/Loading.unity
     guid: afbf7e72eb6783241a5767904ed2d67a
   - enabled: 1
-    path: Assets/Scenes/Battle_Card.unity
+    path: Assets/CardGame/Scenes/Battle_Card.unity
     guid: b3ce4faa1c6180b44b69ca55fea1b4d5
-  - enabled: 1
-    path: Assets/Scenes/Games/Math.unity
-    guid: 16752f49c298f884596c1dd97a41f0a6
-  - enabled: 1
-    path: Assets/Scenes/Games/Run.unity
-    guid: 939494cf7f6208543ae633345451d93d
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 3921a217bb8a94942a34ffcda9ac41d0,
       type: 2}
