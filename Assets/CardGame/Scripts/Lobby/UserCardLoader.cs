@@ -33,7 +33,6 @@ public class UserCardLoader : MonoBehaviour
         if(serialNumbers != "")
         {
             Parser(serialNumbers);
-            Debug.Log(serialNumbers);
         }
     }
 

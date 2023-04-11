@@ -36,10 +36,10 @@ public class Health : MonoBehaviour,IDamageable
         switch (ownerTeam)
         {
             case ETeamNum.User:
-                this.gameObject.layer = (int)Mathf.Log(battleLayer.playerBody.value,2);
+                this.gameObject.layer = battleLayer.playerBody.LayerIndex;
                 break;
             case ETeamNum.Enemy:
-                this.gameObject.layer = (int)Mathf.Log(battleLayer.enemyBody.value, 2);
+                this.gameObject.layer = battleLayer.enemyBody.LayerIndex;
                 break;
         }
     }

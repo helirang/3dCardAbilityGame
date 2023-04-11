@@ -15,10 +15,10 @@ public class Combat : MonoBehaviour
         switch (this.ownerTeam)
         {
             case ETeamNum.User:
-                this.gameObject.layer = (int)Mathf.Log(battleLayer.playerWeapon.value, 2);
+                this.gameObject.layer = battleLayer.playerWeapon.LayerIndex;
                 break;
             case ETeamNum.Enemy:
-                this.gameObject.layer = (int)Mathf.Log(battleLayer.enemyWeapon.value, 2);
+                this.gameObject.layer = battleLayer.enemyWeapon.LayerIndex;
                 break;
         }
     }

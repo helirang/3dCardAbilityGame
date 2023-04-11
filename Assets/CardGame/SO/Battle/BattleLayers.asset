@@ -13,14 +13,10 @@ MonoBehaviour:
   m_Name: BattleLayers
   m_EditorClassIdentifier: 
   enemyBody:
-    serializedVersion: 2
-    m_Bits: 512
+    m_LayerIndex: 9
   enemyWeapon:
-    serializedVersion: 2
-    m_Bits: 128
+    m_LayerIndex: 7
   playerBody:
-    serializedVersion: 2
-    m_Bits: 256
+    m_LayerIndex: 8
   playerWeapon:
-    serializedVersion: 2
-    m_Bits: 64
+    m_LayerIndex: 6

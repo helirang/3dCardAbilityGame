@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 [CreateAssetMenu(fileName = "Card", menuName = "Cards/card")]
 public class SOCard : ScriptableObject
 {
     public Sprite sprite;
 
-    /// <summary>
-    /// @todo ability 개수가 늘어나면 list로 바꿔서 조합해서 사용하기
-    /// </summary>
-    [SerializeField] AssetReferenceAbility abilityAsset;
+    public AssetReferenceAbility abilityAsset;
+    public AsyncOperationHandle<Ability_Origin> abilityOperation;
+
     [System.NonSerialized] public Ability_Origin ability;
     public ETeamNum targetTeam = ETeamNum.User;
     public int cost = 0;
@@ -26,6 +26,24 @@ public class SOCard : ScriptableObject
     // abilityAsset 로드 완료되면 알려주는 함수 구현하기
     // 로드 완료되면 ability에 데이터 넣기
     // Battle 씬 끝나고 나올 때, Ability번들 전부 언로드하기
+    public void AbilityComplete(Ability_Origin ability , 
+        AsyncOperationHandle<Ability_Origin> handle)
+    {
+        this.ability = ability;
+        abilityOperation = handle;
+    }
+
+    public void UnLoadAbility()
+    {
+        if (abilityOperation.IsValid())
+        {
+            Addressables.Release(abilityOperation);
+        }
+        else
+        {
+            CustomDebugger.Debug(LogType.LogError, "ability 오퍼레이션이 유효하지 않습니다.");
+        }
+    }
 }
 
 [System.Serializable]
