@@ -1009,10 +1009,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff28a27780b9d2a4580ef08520c7f0f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmgTextPrefab: {fileID: 1938616978528472741, guid: 8e74fdf07283d5d428cdb3c75b8fdfba,
+  dmgTextPrefab: {fileID: 1922797177483175833, guid: 40aead185a8858d43846efcfcf591571,
     type: 3}
   parentCanvas: {fileID: 3255351539808028473}
-  textOffset: {x: 200, y: 40, z: 0}
+  textOffset: {x: 60, y: 60, z: 0}
 --- !u!114 &3255351539808028613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1039,7 +1039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 3255351540148373828}
-  teamNum: 0
+  dropDetecter: {fileID: 0}
 --- !u!222 &8959724571916168749
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1571,6 +1571,7 @@ MonoBehaviour:
   charactername: {fileID: 3255351539808028613}
   animController: {fileID: 3255351540148373691}
   abilityDropSlot: {fileID: 6089215421325373399}
+  baseDamage: 10
 --- !u!114 &3255351540148373689
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 300
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0ec88e194eb0be244804bc4902f199d1, type: 2}
-  m_sharedMaterial: {fileID: 5417081227470864553, guid: 0ec88e194eb0be244804bc4902f199d1,
+  m_fontAsset: {fileID: 11400000, guid: 9373e8fb711994d46bcaefd2db255ea1, type: 2}
+  m_sharedMaterial: {fileID: -7730588379151893212, guid: 9373e8fb711994d46bcaefd2db255ea1,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.8
+  m_fontSize: 62.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -281,9 +281,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Buy
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0ec88e194eb0be244804bc4902f199d1, type: 2}
-  m_sharedMaterial: {fileID: 5417081227470864553, guid: 0ec88e194eb0be244804bc4902f199d1,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -307,7 +306,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.8
+  m_fontSize: 72
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -751,8 +750,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uD798 10 \uC99D\uAC00"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0ec88e194eb0be244804bc4902f199d1, type: 2}
-  m_sharedMaterial: {fileID: 5417081227470864553, guid: 0ec88e194eb0be244804bc4902f199d1,
+  m_fontAsset: {fileID: 11400000, guid: 9373e8fb711994d46bcaefd2db255ea1, type: 2}
+  m_sharedMaterial: {fileID: -7730588379151893212, guid: 9373e8fb711994d46bcaefd2db255ea1,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -777,7 +776,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.8
+  m_fontSize: 62.15
   m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 1

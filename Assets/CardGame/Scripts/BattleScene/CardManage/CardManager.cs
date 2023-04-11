@@ -44,10 +44,9 @@ public class CardManager : MonoBehaviour
         //Static Class인 CardStorage에 있는 모든 카드 데이터를 불러온다.
         cardList = CardStorage.GetAllCardDatas();
 
-        Debug.Log(cardList.Count);
         foreach (var data in cardList)
         {
-            Debug.Log(data.name);
+            CustomDebugger.Debug(LogType.Log, $"소유한 카드 : {data.name}");
         }
         //cardList의 데이터에 기반하여 카드 생성
         MakeCard(startCard);

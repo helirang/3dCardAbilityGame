@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: Card_Atk10
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 5b22ecc14aeb1674388d672b99032575, type: 3}
-  ability: {fileID: 11400000, guid: a77c8bdc6e94ddb41a7f6ed3b454b644, type: 2}
+  abilityAsset:
+    m_AssetGUID: a77c8bdc6e94ddb41a7f6ed3b454b644
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   targetTeam: 1
   cost: 2
   price: 3
   serialNumber: 4
+  desc: "\uC989\uC2DC \uACF5\uACA9 10"

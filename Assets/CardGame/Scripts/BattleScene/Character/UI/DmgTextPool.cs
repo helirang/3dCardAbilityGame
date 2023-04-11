@@ -7,7 +7,7 @@ public class DmgTextPool : MonoBehaviour
 {
     public IObjectPool<DamageText> dmgPool;
 
-    [SerializeField] GameObject dmgTextPrefab;
+    [SerializeField] DamageText dmgTextPrefab;
     [SerializeField] Canvas parentCanvas;
 
     [Tooltip("데미지 텍스트의 위치 오프셋")]

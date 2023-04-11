@@ -85,13 +85,42 @@ public static class CardStorage
         return cardDatas;
     }
 
-    public static void SaveCard()
+    public static void Save()
     {
-        //세이브 구현하기
+        string saveData = "";
+
+        foreach(var CardSerialNum in cardDictionary.Keys)
+        {
+            saveData += $"{CardSerialNum},";
+        }
+        UnityEngine.PlayerPrefs.SetString("Cards",saveData);
+    }
+
+    public static string Load()
+    {
+        return UnityEngine.PlayerPrefs.GetString("Cards", null);
     }
 }
 
 public static class MoneyStorage
 {
     public static int zem;
+    public static int ZEM { 
+        get { return zem; }
+        set 
+        { 
+            zem = value;
+            Save();
+        } 
+    }
+
+    public static void Load()
+    {
+        zem = UnityEngine.PlayerPrefs.GetInt("ZEM",0);
+    }
+
+    static void Save()
+    {
+        UnityEngine.PlayerPrefs.SetInt("ZEM", zem);
+    }
 }
