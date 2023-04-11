@@ -1882,6 +1882,11 @@ MonoBehaviour:
   basicCardList:
   - {fileID: 11400000, guid: fb1621a4fa5769148b609cf6fd39659f, type: 2}
   - {fileID: 11400000, guid: bea7517786731614b99d9077ea60a319, type: 2}
+  allCardLIst:
+  - {fileID: 11400000, guid: 769194c339f87f449ae0e7118a4d527b, type: 2}
+  - {fileID: 11400000, guid: fb1621a4fa5769148b609cf6fd39659f, type: 2}
+  - {fileID: 11400000, guid: bea7517786731614b99d9077ea60a319, type: 2}
+  - {fileID: 11400000, guid: 278df3aa3942b4c46964f6b3fc6c1920, type: 2}
 --- !u!1 &589574897
 GameObject:
   m_ObjectHideFlags: 0

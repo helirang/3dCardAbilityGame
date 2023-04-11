@@ -56,7 +56,7 @@ public class ResultManager : MonoBehaviour
         rewardItemImg.sprite = rewardSprite;
         rewardItemText.text = coin.ToString();
 
-        MoneyStorage.zem += coin;
+        MoneyStorage.ZEM += coin;
 
         resultCanvas.gameObject.SetActive(true);
         StartCoroutine(WaitTime());

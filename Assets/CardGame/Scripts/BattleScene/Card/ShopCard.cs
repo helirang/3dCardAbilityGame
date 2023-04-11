@@ -41,14 +41,15 @@ public class ShopCard : MonoBehaviour
 
     public void BuyCard()
     {
-        if(MoneyStorage.zem >= cardData.price)
+        if(MoneyStorage.ZEM >= cardData.price)
         {
             soldOut.gameObject.SetActive(true);
             bool isAlreadyHave = CardStorage.CheckSerialNum(cardData.serialNumber);
             if (!isAlreadyHave)
             {
-                MoneyStorage.zem -= cardData.price;
+                MoneyStorage.ZEM -= cardData.price;
                 CardStorage.AddCard(cardData);
+                CardStorage.Save();
                 BuyEvent.Invoke();
                 button.interactable = false;
             }

@@ -44,8 +44,8 @@ public static class StatCalculator
 
 public static class CardStorage
 {
-    static Dictionary<int, SOCard> cardDictionary = new Dictionary<int, SOCard>(); 
-
+    static Dictionary<int, SOCard> cardDicBySerialNumber = new Dictionary<int, SOCard>();
+    public static readonly string trim = ","; 
     /// <summary>
     /// 카드 데이터를 추가시킨다
     /// </summary>
@@ -58,15 +58,15 @@ public static class CardStorage
         //{
         //    cardDictionary.Add(cardData.GetInstanceID(), cardData);
         //}
-        if (!cardDictionary.ContainsKey(cardData.serialNumber))
+        if (!cardDicBySerialNumber.ContainsKey(cardData.serialNumber))
         {
-            cardDictionary.Add(cardData.serialNumber, cardData);
+            cardDicBySerialNumber.Add(cardData.serialNumber, cardData);
         }
     }
 
     public static bool CheckSerialNum(int num)
     {
-        return cardDictionary.ContainsKey(num);
+        return cardDicBySerialNumber.ContainsKey(num);
     }
 
     /// <summary>
@@ -77,7 +77,7 @@ public static class CardStorage
     {
         List<SOCard> cardDatas = new List<SOCard>();
 
-        foreach(var data in cardDictionary)
+        foreach(var data in cardDicBySerialNumber)
         {
             cardDatas.Add(data.Value);
         }
@@ -89,9 +89,9 @@ public static class CardStorage
     {
         string saveData = "";
 
-        foreach(var CardSerialNum in cardDictionary.Keys)
+        foreach(var CardSerialNum in cardDicBySerialNumber.Keys)
         {
-            saveData += $"{CardSerialNum},";
+            saveData += $"{CardSerialNum}{trim}";
         }
         UnityEngine.PlayerPrefs.SetString("Cards",saveData);
     }
@@ -104,7 +104,7 @@ public static class CardStorage
 
 public static class MoneyStorage
 {
-    public static int zem;
+    static int zem;
     public static int ZEM { 
         get { return zem; }
         set 

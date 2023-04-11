@@ -6,15 +6,21 @@ public class UserCardLoader : MonoBehaviour
 {
     [SerializeField] List<SOCard> basicCardList;
     [SerializeField] List<SOCard> allCardLIst;
-    Dictionary<int, SOCard> cardDictionary;
+    Dictionary<int, SOCard> cardDicBySerialNumber = new Dictionary<int, SOCard>();
     private void Awake()
     {
-        //@todo 테스트용 동작 / 차후 변경하기
+        foreach (var data in allCardLIst)
+        {
+            cardDicBySerialNumber.Add(data.serialNumber, data);
+        }
+
+        LoadUserCardData();
+
+        //기본 카드 넣기
         foreach (var data in basicCardList)
         {
             CardStorage.AddCard(data);
         }
-        LoadUserCardData();
     }
 
     // SOCard는 캐싱해서 사용.
@@ -22,21 +28,46 @@ public class UserCardLoader : MonoBehaviour
     // 이유 : Ability에 차후 이펙트 및 애니메이션 교체 등의 기능을 추가할 예정.
     void LoadUserCardData()
     {
-        string card = CardStorage.Load();
+        string serialNumbers = CardStorage.Load();
 
-        if(card != "")
+        if(serialNumbers != "")
         {
-            Debug.Log(card);
+            Parser(serialNumbers);
+            Debug.Log(serialNumbers);
         }
-        else
-        {
-            Debug.Log("CardDataIsNone");
-        }
-        CardStorage.Save();
     }
 
     void Parser(string data)
     {
+        string trim = CardStorage.trim;
 
+        string[] words = data.Split(trim);
+
+        foreach(var word in words)
+        {
+            int serialNumber = 0;
+            
+            if(int.TryParse(word, out serialNumber))
+            {
+                AddCardStorage(serialNumber);
+            }
+        }
+    }
+
+    bool AddCardStorage(int serialNumber)
+    {
+        bool result = false;
+
+        if (cardDicBySerialNumber.ContainsKey(serialNumber))
+        {
+            CardStorage.AddCard(cardDicBySerialNumber[serialNumber]);
+            result = true;
+        }
+        else
+        {
+            CustomDebugger.Debug(LogType.LogError, $"카드리스트에 없는 시리얼번호 : {serialNumber} 입니다.");
+        }
+
+        return result;
     }
 }

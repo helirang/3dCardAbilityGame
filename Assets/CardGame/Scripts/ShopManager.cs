@@ -12,6 +12,11 @@ public class ShopManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI moneyTMP;
 
+    private void Awake()
+    {
+        MoneyStorage.Load();
+    }
+
     private void Start()
     {
         UpdateMoneyUI();
@@ -28,7 +33,7 @@ public class ShopManager : MonoBehaviour
 
     void UpdateMoneyUI()
     {
-        moneyTMP.text = MoneyStorage.zem.ToString();
+        moneyTMP.text = MoneyStorage.ZEM.ToString();
     }
 
     void OnCardSold()

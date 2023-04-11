@@ -22,8 +22,6 @@ public class DragDrop : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHan
     GameCard gameCard;
     IObjectPool<GameCard> cardPool;
 
-    public event System.Action ReleaseEvent;
-
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
