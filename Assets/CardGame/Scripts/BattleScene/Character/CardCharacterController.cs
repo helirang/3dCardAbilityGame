@@ -79,8 +79,7 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
         basePosition = this.transform.position;
         baseRotation = this.transform.rotation;
 
-        //카드 드롭 슬롯 셋팅 및 활성화
-        abilityDropSlot.Setting(teamNum);
+        //카드 드롭 슬롯 활성화
         abilityDropSlot.gameObject.SetActive(true);
 
         //이름 셋팅
@@ -139,6 +138,11 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
     #endregion
 
     #region 캐릭터 행동 시작 및 종료 함수
+
+    /// <summary>
+    /// <para> 1. 캐릭터에 등록된 모든 어빌리티 발동</para>
+    /// <para> 2.캐릭터 활동 시작</para>
+    /// </summary>
     public void ActionStart()
     {
         if(abilityList?.Count > 0)
@@ -153,6 +157,10 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
         }
     }
 
+    /// <summary>
+    /// <para>ActionEndEvent를 Invoke하는 함수</para>
+    /// <para>이벤트에 바인딩된 함수가 없으면 에러 로그를 띄운다.</para>
+    /// </summary>
     void ActionEnd()
     {
         if (ActionEndEvent != null)
@@ -188,13 +196,6 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
     public bool GetIsAlive()
     {
         return isAlive;
-    }
-
-    private void OnDestroy()
-    {
-        abilityList.Clear();
-        ActionEndEvent = null;
-        DeadEvent = null;
     }
 
     /// <summary>
@@ -237,12 +238,25 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
         nav.isStopped = true;
     }
 
+    /// <summary>
+    /// <para>행동 완료 후 대기 시간</para>
+    /// <para>ActionEnd함수를 호출한다.</para>
+    /// </summary>
+    /// <returns></returns>
     IEnumerator ActionEndWait()
     {
         yield return new WaitForSeconds(1f);
         ActionEnd();
     }
 
+    private void OnDestroy()
+    {
+        abilityList.Clear();
+        ActionEndEvent = null;
+        DeadEvent = null;
+    }
+
+    #region ICardTargetable 인터페이스 구현
     public void DamageControl(int value)
     {
         buffDamage += value;
@@ -256,8 +270,14 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
             health.Hit(Mathf.Abs(value));
     }
 
-    public void AbilitySave(Ability_Origin ability)
+    public void AbilityEquip(Ability_Origin ability)
     {
         abilityList.Add(ability);
     }
+
+    public ETeamNum GetTeamNum()
+    {
+        return teamNum;
+    }
+    #endregion
 }

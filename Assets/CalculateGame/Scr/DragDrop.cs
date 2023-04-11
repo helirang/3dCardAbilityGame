@@ -67,14 +67,15 @@ public class DragDrop : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHan
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        bool isApply = false;
+        bool isActive = false;
 
         foreach (var gm in eventData.hovered)
         {
+            //드래그가 끝난 지점에 위치한 UIObject에 DropSlot이 있는지 확인
             if (gm.GetComponent <Ability_DropSlot>() != null)
             {
-                ETeamNum activeTeam = gameCard.GetTargetTeam();
-                isApply = gm.GetComponent<Ability_DropSlot>().TeamCheck(activeTeam);
+                // 카드가 사용되었는지 확인
+                isActive = gameCard.GetIsActive();
                 break;
             }
         }
@@ -83,13 +84,14 @@ public class DragDrop : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHan
         this.transform.SetParent(parent);
         canvasGroup.blocksRaycasts = true;
 
-        if (isApply)
+        if (isActive)
         {
-            Debug.Log("Release");
+            //카드 비활성화
             cardPool.Release(this.gameCard);
         }
         else
         {
+            //드래그 전 위치로 카드 이동
             this.transform.SetSiblingIndex(siblingIndex);
         }
     }

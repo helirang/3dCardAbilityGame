@@ -24,7 +24,9 @@ public class CardManager : MonoBehaviour
     List<SOCard> cardList;
 
     [Header("마나 관련 변수")]
+    [Tooltip("시작 시 획득할 마나")]
     [SerializeField] int startMana = 5;
+    [Tooltip("매턴 획득할 마나")]
     [SerializeField] int turnMana = 1;
     int runtimeMana = 0;
     int runtimeCardCount = 0;
@@ -76,6 +78,10 @@ public class CardManager : MonoBehaviour
         runtimeCardCount--;
     }
 
+    /// <summary>
+    /// 현재 활성화되어 있는 카드의 수를 반환
+    /// </summary>
+    /// <returns></returns>
     public int GetAliveCardCount()
     {
         return runtimeCardCount;

@@ -14,6 +14,8 @@ public class GameCard : MonoBehaviour
 
     CardManager cardManager;
 
+    bool isActive = false;
+
     public void Setting(SOCard data, CardManager cardManager)
     {
         this.cardManager = cardManager;
@@ -21,15 +23,23 @@ public class GameCard : MonoBehaviour
         itemImage.sprite = cardData.sprite;
         abilityTMP.text = cardData.GetDesc();
         costTMP.text = cardData.cost.ToString();
+
+        isActive = false;
     }
 
-    public void Active(ICardTargetable target, ETeamNum targetTeam)
+    public void Active(ICardTargetable target)
     {
-        if (TeamCheck(targetTeam))
+        if (TeamCheck(target.GetTeamNum()))
         {
             cardManager.SetMana(-cardData.cost);
             cardData.ability.Active(target);
+            isActive = true;
         }
+    }
+
+    public bool GetIsActive()
+    {
+        return isActive;
     }
 
     public ETeamNum GetTargetTeam()

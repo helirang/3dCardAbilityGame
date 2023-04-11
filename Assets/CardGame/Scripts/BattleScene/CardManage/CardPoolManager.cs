@@ -34,6 +34,8 @@ public class CardPoolManager : MonoBehaviour
     private void OnGetCard(GameCard card)
     {
         DragDrop dragDrop = card.GetComponent<DragDrop>();
+
+        //카드의 순번을 할당한다.
         int cardIdx = cardManager.GetAliveCardCount();
         dragDrop.Setting(cardCanvas, parent, pool, cardIdx);
 
