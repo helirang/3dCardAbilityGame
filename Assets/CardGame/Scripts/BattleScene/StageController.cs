@@ -39,9 +39,15 @@ public class StageController : MonoBehaviour,IDataPipeInjection
     [SerializeField] Button startButton;
 
     public delegate void GameStateChangeDel(EGameState gameState);
+    /// <summary>
+    /// <para>게임의 상태가 바뀌면 호출되는 이벤트</para>
+    /// </summary>
     public event GameStateChangeDel StateChangeEvent;
     public delegate void CharacterListUpdateDel(ETeamNum teamNum,
         List<CardCharacterController> characters);
+    /// <summary>
+    /// <para>각 팀별 캐릭터 List를 전파하는 이벤트 </para>
+    /// </summary>
     public event CharacterListUpdateDel CharacterListUpdateEvent;
 
     #region 셋팅 및 초기화
@@ -147,6 +153,7 @@ public class StageController : MonoBehaviour,IDataPipeInjection
         StateChangeEvent.Invoke(EGameState.턴시작);
         actionQueue.Clear();
 
+        ///@todo 사망 체크 등을 진행하면 불필요한 인보크를 없앨 수 있다. 
         CharacterListUpdateEvent.Invoke(ETeamNum.Enemy, enemyBySpawnID.Values.ToList());
         CharacterListUpdateEvent.Invoke(ETeamNum.User, playerBySpawnID.Values.ToList());
 

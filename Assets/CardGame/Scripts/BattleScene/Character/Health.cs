@@ -18,7 +18,13 @@ public class Health : MonoBehaviour,IDamageable
     [Header("데미지 팝업")]
     [SerializeField] DmgTextPool pool;
 
+    /// <summary>
+    /// HP가 0이 되면 호출되는 이벤트
+    /// </summary>
     public event Action DeadEvent;
+    /// <summary>
+    /// 피격 시 호출되는 이벤트
+    /// </summary>
     public event Action HitEvent;
 
     #region 설정 및 초기화 함수

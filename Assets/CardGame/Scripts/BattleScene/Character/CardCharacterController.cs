@@ -37,8 +37,14 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
     bool isAlive = true;
 
     public delegate void EnemyDeadDel(int spawnID, ETeamNum teamNum);
+    /// <summary>
+    /// 캐릭터 사망 시, 호출되는 이벤트
+    /// </summary>
     public event EnemyDeadDel DeadEvent;
     public delegate void ActionEndDel();
+    /// <summary>
+    /// 캐릭터의 동작이 끝나면 호출되는 이벤트
+    /// </summary>
     public event ActionEndDel ActionEndEvent;
 
     private void Awake()
@@ -88,7 +94,6 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
 
     /// <summary>
     /// <para> 캐릭터 사망 처리 및 애니메이션 재생 </para>
-    /// <para> HP가 0이되면 호출되는 함수 </para>
     /// </summary>
     public void OnDead()
     {
@@ -97,6 +102,10 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
         DeadEvent?.Invoke(spawnID,teamNum);
     }
 
+    /// <summary>
+    /// <para> 캐릭터 이동 애니메이션 중지</para>
+    /// 공격 함수 호출
+    /// </summary>
     void OnArrive()
     {
         animController.StopMove();
@@ -169,7 +178,8 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
     #endregion
 
     /// <summary>
-    /// <para>공격 함수</para>
+    /// <para>공격 데미지 할당</para>
+    /// <para>공격 애니메이션 시작</para>
     /// </summary>
     void Attack()
     {

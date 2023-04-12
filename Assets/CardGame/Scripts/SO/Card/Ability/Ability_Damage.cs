@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Abilties", menuName = "Abilties/Buffs/Damage")]
-public class Buff_Damage : Ability_Origin
+public class Ability_Damage : Ability_Origin
 {
     [SerializeField] int damageValue = 0;
 

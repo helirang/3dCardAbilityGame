@@ -72,7 +72,7 @@ public class SceneLoader : MonoBehaviour
             Addressables.LoadAssetAsync<Ability_Origin>(card.abilityAsset).Completed +=
                 (handle) =>
                 {
-                    card.AbilityComplete(handle.Result,handle);
+                    card.OnAbilityComplete(handle.Result,handle);
                     AbilityLoadCheck(cards.Count);
                 };
         }

@@ -14,6 +14,9 @@ public class CardCharacterMovement : MonoBehaviour
     Vector3 basePosition;
     Quaternion baseRotation;
 
+    /// <summary>
+    /// 목표와 일정 간격 이내로 진입하면 호출되는 이벤트
+    /// </summary>
     public event System.Action ArriveEvent;
     public void Setting(Transform uiTransform)
     {

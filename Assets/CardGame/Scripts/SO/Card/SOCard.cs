@@ -26,7 +26,7 @@ public class SOCard : ScriptableObject
     // abilityAsset 로드 완료되면 알려주는 함수 구현하기
     // 로드 완료되면 ability에 데이터 넣기
     // Battle 씬 끝나고 나올 때, Ability번들 전부 언로드하기
-    public void AbilityComplete(Ability_Origin ability , 
+    public void OnAbilityComplete(Ability_Origin ability , 
         AsyncOperationHandle<Ability_Origin> handle)
     {
         this.ability = ability;
@@ -41,7 +41,8 @@ public class SOCard : ScriptableObject
         }
         else
         {
-            CustomDebugger.Debug(LogType.LogError, "ability 오퍼레이션이 유효하지 않습니다.");
+            CustomDebugger.Debug(LogType.LogError, 
+                "ability 오퍼레이션이 유효하지 않습니다.");
         }
     }
 
