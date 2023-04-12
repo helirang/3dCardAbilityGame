@@ -44,6 +44,14 @@ public class SOCard : ScriptableObject
             CustomDebugger.Debug(LogType.LogError, "ability 오퍼레이션이 유효하지 않습니다.");
         }
     }
+
+    private void OnDestroy()
+    {
+        if (abilityOperation.IsValid())
+        {
+            Addressables.Release(abilityOperation);
+        }
+    }
 }
 
 [System.Serializable]

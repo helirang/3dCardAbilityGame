@@ -26,7 +26,7 @@ public class ShopManager : MonoBehaviour
 
             ShopCard shopCard = Instantiate(shopCardPrefab,cardParent);
             shopCard.Setting(card,isAlreadyHave);
-            shopCard.BuyEvent += OnCardSold;
+            shopCard.BuyEvent += OnItemSold;
             shopCard.MoneyLackEvent += OnMoneyLack;
         }
     }
@@ -36,7 +36,7 @@ public class ShopManager : MonoBehaviour
         moneyTMP.text = MoneyStorage.ZEM.ToString();
     }
 
-    void OnCardSold()
+    void OnItemSold()
     {
         UpdateMoneyUI();
     }

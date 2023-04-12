@@ -54,20 +54,20 @@ public class StageController : MonoBehaviour,IDataPipeInjection
         StateChangeEvent += cardManager.OnGameState;
     }
 
-    public void SetDatapipe(SOStageDataPipe dataPipe)
-    {
-        stageDataPipe = dataPipe;
-    }
-
     private void Start()
     {
-        stageDataPipe.GameStartEvent += OnGameStart;
-        stageDataPipe.GameClearEvent += OnGameEnd;
-        stageDataPipe.GameOverEvent += OnGameEnd;
-
         //@todo 몬스터 데이터 SO로 만들기
         Spawn(ETeamNum.User, userName, userHp, userDmg);
         Spawn(ETeamNum.Enemy, enemyNmae, enemyHp, enemyDmg);
+    }
+
+    public void SetDatapipe(SOStageDataPipe dataPipe)
+    {
+        stageDataPipe = dataPipe;
+
+        stageDataPipe.GameStartEvent += OnGameStart;
+        stageDataPipe.GameClearEvent += OnGameEnd;
+        stageDataPipe.GameOverEvent += OnGameEnd;
     }
 
     public void RemoveDatapipe()
@@ -143,8 +143,8 @@ public class StageController : MonoBehaviour,IDataPipeInjection
     public void TurnStart()
     {
         startButton.interactable = false;
-        StateChangeEvent.Invoke(EGameState.턴시작);
 
+        StateChangeEvent.Invoke(EGameState.턴시작);
         actionQueue.Clear();
 
         CharacterListUpdateEvent.Invoke(ETeamNum.Enemy, enemyBySpawnID.Values.ToList());
@@ -155,6 +155,8 @@ public class StageController : MonoBehaviour,IDataPipeInjection
         List<int> spawnIds = new List<int>();
         spawnIds.AddRange(playerBySpawnID.Keys.ToList());
         spawnIds.AddRange(enemyBySpawnID.Keys.ToList());
+
+        //행동 순서에 따라 spawnId를 액션큐에 넣기
         for (int i=0; i < maxCount; i++)
         {
             actionQueue.Enqueue(spawnIds[i]);
@@ -189,8 +191,8 @@ public class StageController : MonoBehaviour,IDataPipeInjection
     /// </summary>
     void CharacterActive()
     {
-        CardCharacterController character = null;
         int idx = actionQueue.Dequeue();
+        CardCharacterController character = null;
 
         if (playerBySpawnID.ContainsKey(idx))
             character = playerBySpawnID[idx];

@@ -120,7 +120,7 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
                 this.transform.position = basePosition;
                 this.transform.rotation = baseRotation;
                 canvasTransform.rotation = Quaternion.Euler(30f, 0f, 0f);
-                buffDamage = 0;
+                buffDamage = 0; //@todo 연속된 턴 버프도 생각해보기
                 break;
         }
     }
@@ -208,7 +208,8 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
 
         int targetNum = Random.Range(0, enemyList.Count);
 
-        nav.isStopped = false; // navmeshAgent는 Action에서만 관리한다. 액션 시작에 활성화, 액션 끝 부분에 비활성화
+        // navmeshAgent는 Action에서만 관리한다. 액션 시작에 활성화, 액션 끝 부분에 비활성화
+        nav.isStopped = false; 
         nav.SetDestination(enemyList[targetNum].transform.position);
 
         animController.StartMove();
@@ -221,7 +222,8 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
             if (nav.pathPending)
                 yield return null;
 
-            if (nav.remainingDistance <= nav.stoppingDistance) //일정 간격 이하로 진입하면 공격 시작
+            //일정 간격 이하로 진입하면 공격 시작
+            if (nav.remainingDistance <= nav.stoppingDistance) 
             {
                 Attack();
                 isAttackEnd = true; //While문 해제
