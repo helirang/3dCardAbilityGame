@@ -12,7 +12,7 @@ public class Health : MonoBehaviour,IDamageable
 
     [Header("체력 관련 필드")]
     [SerializeField] Slider hpSlider;
-    [SerializeField] int baseHp=100,runtimeHp=100;
+    int baseHp=100,runtimeHp=100;
     bool isDeadable = true;
 
     [Header("데미지 팝업")]
@@ -26,6 +26,16 @@ public class Health : MonoBehaviour,IDamageable
     /// 피격 시 호출되는 이벤트
     /// </summary>
     public event Action HitEvent;
+
+    private void Awake()
+    {
+        if(hpSlider == null)
+            CustomDebugger.Debug(LogType.LogError, 
+                "할당 된 HPSlider가 없습니다.");
+        if (battleLayer == null)
+            CustomDebugger.Debug(LogType.LogError, 
+                "할당 된 battleLayer가 없습니다.");
+    }
 
     #region 설정 및 초기화 함수
     public void SetHP(int num)
@@ -48,11 +58,6 @@ public class Health : MonoBehaviour,IDamageable
                 this.gameObject.layer = battleLayer.enemyBody.LayerIndex;
                 break;
         }
-    }
-
-    public void SetSlider(Slider slider)
-    {
-        this.hpSlider = slider;
     }
 
     public void SetDeadable(bool isDeadable)
