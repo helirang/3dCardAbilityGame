@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[RequireComponent(typeof(DragDrop))]
 public class GameCard : MonoBehaviour
 {
     [SerializeField] SOCard cardData;
@@ -11,10 +12,16 @@ public class GameCard : MonoBehaviour
     [SerializeField] Image itemImage;
     [SerializeField] TextMeshProUGUI abilityTMP;
     [SerializeField] TextMeshProUGUI costTMP;
-
+    public DragDrop dragDrop;
+    //@todo 결합을 해지하는게 좋은 것인가 고민이 든다.
     CardManager cardManager;
 
     bool isActive = false;
+
+    private void Awake()
+    {
+        if (dragDrop == null) dragDrop = this.GetComponent<DragDrop>();
+    }
 
     public void Setting(SOCard data, CardManager cardManager)
     {

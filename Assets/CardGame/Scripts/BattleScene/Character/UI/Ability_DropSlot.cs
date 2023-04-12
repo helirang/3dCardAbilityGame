@@ -1,17 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class Ability_DropSlot : MonoBehaviour, IDropHandler
 {
-    [SerializeField] GameObject character;
-    [SerializeField] GameObject dropDetecter;
+    [SerializeField] Image dropDetecter;
     ICardTargetable target;
 
-    private void Awake()
+    public void Setting(ICardTargetable target)
     {
-        target = character.GetComponent<ICardTargetable>();
+        this.target = target;
     }
 
     public void OnDrop(PointerEventData eventData)

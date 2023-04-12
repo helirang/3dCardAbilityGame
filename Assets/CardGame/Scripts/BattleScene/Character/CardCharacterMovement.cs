@@ -77,4 +77,9 @@ public class CardCharacterMovement : MonoBehaviour
 
         nav.isStopped = true;
     }
+
+    private void OnDestroy()
+    {
+        ArriveEvent = null;
+    }
 }

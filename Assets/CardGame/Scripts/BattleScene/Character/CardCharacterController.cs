@@ -48,15 +48,15 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
         if (movement == null) movement = this.GetComponent<CardCharacterMovement>();
         if (combat == null) combat = weaponCollider.GetComponent<Combat>();
 
+        weaponCollider.enabled = false;
+
         health.DeadEvent += OnDead;
         health.HitEvent += OnHit;
 
-        weaponCollider.enabled = false;
-
         movement.Setting(canvasTransform);
-        movement.ArriveEvent += Attack;
+        movement.ArriveEvent += OnArrive;
 
-        canvasTransform.rotation = Quaternion.Euler(30f, 0f, 0f);
+        abilityDropSlot.Setting(this);
     }
 
     public void Setting(int spawnID, ETeamNum teamNum, int hp,string characterName,int damage)
@@ -95,6 +95,12 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
         isAlive = false;
         animController.Dead();
         DeadEvent?.Invoke(spawnID,teamNum);
+    }
+
+    void OnArrive()
+    {
+        animController.StopMove();
+        Attack();
     }
 
     public void OnGameState(EGameState gameState)
@@ -170,7 +176,6 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
         //데미지 할당
         combat.DamageSet(baseDamage+buffDamage);
 
-        animController.StopMove();
         //공격 애니메이션 실행 및 콜백 함수 전달
         animController.Attack(
             ()=> weaponCollider.enabled = true,
@@ -201,9 +206,17 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
         ActionEnd();
     }
 
+    void EventUnBind()
+    {
+        health.DeadEvent -= OnDead;
+        health.HitEvent -= OnHit;
+        movement.ArriveEvent -= OnArrive;
+    }
+
     private void OnDestroy()
     {
         abilityList.Clear();
+        EventUnBind();
         ActionEndEvent = null;
         DeadEvent = null;
     }

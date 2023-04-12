@@ -523,6 +523,7 @@ MonoBehaviour:
   itemImage: {fileID: 28367188669355327}
   abilityTMP: {fileID: 1466675148420717916}
   costTMP: {fileID: 8042772256165964237}
+  dragDrop: {fileID: 6017699306404227158}
 --- !u!114 &6017699306404227158
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1038,8 +1038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178f8400d967d8e4e9db5675d29e63d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 3255351540148373828}
-  dropDetecter: {fileID: 0}
+  dropDetecter: {fileID: 2999690076786335547}
 --- !u!222 &8959724571916168749
 CanvasRenderer:
   m_ObjectHideFlags: 0
