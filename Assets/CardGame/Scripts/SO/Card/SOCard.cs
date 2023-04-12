@@ -35,23 +35,19 @@ public class SOCard : ScriptableObject
 
     public void UnLoadAbility()
     {
-        if (abilityOperation.IsValid())
+        //@todo 중복 능력 시스템으로 발전시키려면 어빌리트의 로드 및 언로드를 스크립트 필요
+        if (ability != null && abilityOperation.IsValid())
         {
+            ability = null;
             Addressables.Release(abilityOperation);
-        }
-        else
-        {
-            CustomDebugger.Debug(LogType.LogError, 
-                "ability 오퍼레이션이 유효하지 않습니다.");
+            CustomDebugger.Debug(LogType.Log,
+                "어빌리티 언로드 완료");
         }
     }
 
     private void OnDestroy()
     {
-        if (abilityOperation.IsValid())
-        {
-            Addressables.Release(abilityOperation);
-        }
+        UnLoadAbility();
     }
 }
 
