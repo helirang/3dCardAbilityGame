@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent),typeof(Rigidbody), typeof(Health))]
-[RequireComponent(typeof(AnimController))]
+[RequireComponent(typeof(AnimController), typeof(Health))]
+[RequireComponent(typeof(CardCharacterMovement))]
 public class CardCharacterController : MonoBehaviour,ICardTargetable
 {
     [Header("Movement")]
-    [SerializeField] Rigidbody myRigidbody;
-    [SerializeField] NavMeshAgent nav;
+    [SerializeField] CardCharacterMovement movement;
 
     [Header("WorldUI")]
     [SerializeField] Transform canvasTransform;
+    [SerializeField] NameController charactername;
 
     [Header("Battle")]
     [SerializeField] Combat combat;
     [SerializeField] Collider weaponCollider;
     [SerializeField] Health health;
     [SerializeField] ETeamNum teamNum = ETeamNum.Enemy;
-    [SerializeField] NameController charactername;
 
     [Header("Animation")]
     [SerializeField] AnimController animController;
@@ -28,13 +27,9 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
     [SerializeField] Ability_DropSlot abilityDropSlot;
     List<Ability_Origin> abilityList = new List<Ability_Origin>();
 
-    [Header("테스트용 노출")]
     List<CardCharacterController> enemyList;
     List<CardCharacterController> teamList;
     int spawnID;
-
-    Vector3 basePosition;
-    Quaternion baseRotation;
 
     //테스트용 SerializeField 선언 차후 지우기
     [SerializeField] int baseDamage = 10;
@@ -48,17 +43,18 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
 
     private void Awake()
     {
-        if (nav == null) nav = this.GetComponent<NavMeshAgent>();
         if (health == null) health = this.GetComponent<Health>();
-        if (myRigidbody == null) myRigidbody = this.GetComponent<Rigidbody>();
         if (animController == null) animController = this.GetComponent<AnimController>();
-
+        if (movement == null) movement = this.GetComponent<CardCharacterMovement>();
         if (combat == null) combat = weaponCollider.GetComponent<Combat>();
 
         health.DeadEvent += OnDead;
         health.HitEvent += OnHit;
 
         weaponCollider.enabled = false;
+
+        movement.Setting(canvasTransform);
+        movement.ArriveEvent += Attack;
 
         canvasTransform.rotation = Quaternion.Euler(30f, 0f, 0f);
     }
@@ -74,10 +70,6 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
 
         //weapon 셋팅
         combat.Setting(teamNum,damage);
-
-        //턴 종료시, 할당될 위치와 회전
-        basePosition = this.transform.position;
-        baseRotation = this.transform.rotation;
 
         //카드 드롭 슬롯 활성화
         abilityDropSlot.gameObject.SetActive(true);
@@ -117,9 +109,7 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
             case EGameState.턴시작:
                 break;
             case EGameState.턴종료:
-                this.transform.position = basePosition;
-                this.transform.rotation = baseRotation;
-                canvasTransform.rotation = Quaternion.Euler(30f, 0f, 0f);
+                movement.MoveBasePosition();
                 buffDamage = 0; //@todo 연속된 턴 버프도 생각해보기
                 break;
         }
@@ -153,7 +143,9 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
 
         if(enemyList.Count > 0)
         {
-            StartCoroutine(Action());
+            int targetNum = Random.Range(0, enemyList.Count);
+            animController.StartMove();
+            movement.MoveStart(enemyList[targetNum].transform.position);
         }
     }
 
@@ -196,48 +188,6 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
     public bool GetIsAlive()
     {
         return isAlive;
-    }
-
-    /// <summary>
-    /// 타겟으로 이동 및 공격하는 코루틴
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator Action()
-    {
-        bool isAttackEnd = false;
-
-        int targetNum = Random.Range(0, enemyList.Count);
-
-        // navmeshAgent는 Action에서만 관리한다. 액션 시작에 활성화, 액션 끝 부분에 비활성화
-        nav.isStopped = false; 
-        nav.SetDestination(enemyList[targetNum].transform.position);
-
-        animController.StartMove();
-
-        if (nav.pathPending)
-            yield return null;
-
-        while (!isAttackEnd)
-        {
-            if (nav.pathPending)
-                yield return null;
-
-            //일정 간격 이하로 진입하면 공격 시작
-            if (nav.remainingDistance <= nav.stoppingDistance) 
-            {
-                Attack();
-                isAttackEnd = true; //While문 해제
-            }
-
-            canvasTransform.rotation = Quaternion.Euler(30f, 0f, 0f);
-            myRigidbody.velocity = Vector3.zero;
-            myRigidbody.angularVelocity = Vector3.zero;
-
-            yield return null;
-        }
-
-        animController.StopMove();
-        nav.isStopped = true;
     }
 
     /// <summary>

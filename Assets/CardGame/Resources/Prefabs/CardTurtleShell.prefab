@@ -1521,6 +1521,7 @@ GameObject:
   - component: {fileID: 3255351540148373692}
   - component: {fileID: 3255351540148373691}
   - component: {fileID: 3255351540148373688}
+  - component: {fileID: 2630464970503036367}
   - component: {fileID: 3255351540148373695}
   - component: {fileID: 3255351540148373694}
   - component: {fileID: 3255351540148373690}
@@ -1561,14 +1562,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199c95fd4f638674d91b3c93a25d4fb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myRigidbody: {fileID: 3255351540148373694}
-  nav: {fileID: 3255351540148373695}
+  movement: {fileID: 2630464970503036367}
   canvasTransform: {fileID: 3255351539808028612}
+  charactername: {fileID: 3255351539808028613}
   combat: {fileID: 3255351538566117725}
   weaponCollider: {fileID: 3255351538566117726}
   health: {fileID: 3255351540148373689}
   teamNum: 1
-  charactername: {fileID: 3255351539808028613}
   animController: {fileID: 3255351540148373691}
   abilityDropSlot: {fileID: 6089215421325373399}
   baseDamage: 10
@@ -1635,6 +1635,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e8a2ec56209f54e9f81bd5bae4c6e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2630464970503036367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3255351540148373828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb91f66d92bed9140a3efe88791d7b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myRigidbody: {fileID: 3255351540148373694}
+  nav: {fileID: 3255351540148373695}
 --- !u!195 &3255351540148373695
 NavMeshAgent:
   m_ObjectHideFlags: 0
