@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 191080326}
   - component: {fileID: 191080325}
   m_Layer: 5
-  m_Name: Btn_End
+  m_Name: Btn_Quit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -610,6 +610,7 @@ GameObject:
   - component: {fileID: 208882774}
   - component: {fileID: 208882775}
   - component: {fileID: 208882776}
+  - component: {fileID: 208882777}
   m_Layer: 0
   m_Name: LobbyController
   m_TagString: Untagged
@@ -662,6 +663,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextSene: 3
   enterBtn: {fileID: 1395881787}
+--- !u!114 &208882777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208882772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d771be7aba2aae34ab9e43dbb5de6553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quitBtn: {fileID: 191080325}
 --- !u!1 &379045330
 GameObject:
   m_ObjectHideFlags: 0
