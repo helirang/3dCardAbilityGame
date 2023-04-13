@@ -11,7 +11,6 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] Slider loadingBar;
     [SerializeField] TextMeshProUGUI progressText;
     float progress;
-    bool isComplete = true;
     int count = 0;
     private void Start()
     {
@@ -51,7 +50,6 @@ public class SceneLoader : MonoBehaviour
 
             if (progress >= .9f)
             {
-                if(isComplete)
                 yield return new WaitForSeconds(0.2f);
                 operation.allowSceneActivation = true;
             }
