@@ -8,10 +8,9 @@ public class Combat : MonoBehaviour
     [SerializeField] SOBattleLayer battleLayer;
     int damage = 0;
 
-    public void Setting(ETeamNum ownerTeam, int damage)
+    public void Setting(ETeamNum ownerTeam)
     {
         this.ownerTeam = ownerTeam;
-        DamageSet(damage);
         switch (this.ownerTeam)
         {
             case ETeamNum.User:

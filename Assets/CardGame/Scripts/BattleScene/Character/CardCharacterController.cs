@@ -55,7 +55,7 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
         if (combat == null) combat = weaponCollider.GetComponent<Combat>();
 
         weaponCollider.enabled = false;
-
+        
         health.DeadEvent += OnDead;
         health.HitEvent += OnHit;
 
@@ -65,7 +65,8 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
         abilityDropSlot.Setting(this);
     }
 
-    public void Setting(int spawnID, ETeamNum teamNum, int hp,string characterName,int damage)
+    public void Setting(int spawnID, ETeamNum teamNum, int hp,
+        string characterName,int damage)
     {
         this.spawnID = spawnID;
         this.teamNum = teamNum;
@@ -75,7 +76,8 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
         health.SetHP(hp);
 
         //weapon 셋팅
-        combat.Setting(teamNum,damage);
+        combat.Setting(teamNum);
+        baseDamage = damage;
 
         //카드 드롭 슬롯 활성화
         abilityDropSlot.gameObject.SetActive(true);

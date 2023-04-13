@@ -52,12 +52,6 @@ public static class CardStorage
     /// <param name="cardData"></param>
     public static void AddCard(SOCard cardData)
     {
-        //키 값으로 쓸 아이디 값 검증 필요
-        //일단 카드의 시리얼 넘버로 대체
-        //if (!cardDictionary.ContainsKey(cardData.GetInstanceID())) 
-        //{
-        //    cardDictionary.Add(cardData.GetInstanceID(), cardData);
-        //}
         if (!cardDicBySerialNumber.ContainsKey(cardData.serialNumber))
         {
             cardDicBySerialNumber.Add(cardData.serialNumber, cardData);
