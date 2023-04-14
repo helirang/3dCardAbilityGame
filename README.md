@@ -10,8 +10,11 @@
 # 사용한 기술 버전
  - 유니티 버전 : Unity 2021.3.4f1 
  - 추가로 인스톨한 패키지 :
-   - Addressables 1.19.19 / Memory Profiler 0.7.1 [ Exp ]
+   - Memory Profiler 0.7.1 [ Exp ]
    - Input System 1.3.0 / URP
-
+   - Addressables 1.19.19 
+   [ 번들 관리에 많은 공수가 예상되어, 어드레서블은 현재 일부 ( 어빌리티 )에만 적용하였습니다. ]
+   [ 일부에만 적용된 만큼 implicit asset(암시적 자산)을 피하기 위해 현재 어빌리티에는 이펙트와 메테리얼과 같은 에셋을 포함하지 않고 있습니다. ]
+   
 # Battle Scene 구조도
 ![Flowchart](https://user-images.githubusercontent.com/66342017/231467730-b2aacffc-c29b-4d27-bd91-92abb35b1629.jpg)
