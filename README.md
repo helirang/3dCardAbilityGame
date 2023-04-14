@@ -17,4 +17,5 @@
      - 일부에만 적용된 만큼 implicit asset(암시적 자산)을 피하기 위해 현재 어빌리티에는 이펙트와 메테리얼과 같은 에셋을 포함하지 않고 있습니다.
    
 # Battle Scene 구조도
+ - 구조도 링크 : https://miro.com/app/board/uXjVMZJqMco=/?share_link_id=918120178507
 ![Flowchart](https://user-images.githubusercontent.com/66342017/231467730-b2aacffc-c29b-4d27-bd91-92abb35b1629.jpg)
