@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
+[RequireComponent(typeof(CardManager))]
 public class CardPoolManager : MonoBehaviour
 {
     public IObjectPool<GameCard> pool;
@@ -14,13 +15,13 @@ public class CardPoolManager : MonoBehaviour
     [SerializeField] Transform parent;
     [Tooltip("생성되는 카드가 속할 캔버스")]
     [SerializeField] Canvas cardCanvas;
-
-    int activeCardCount = 0;
+    [SerializeField] CardManager cardManager;
 
     private void Awake()
     {
         pool = new ObjectPool<GameCard>(CreateCard, OnGetCard,
             OnReleaseCard, OnDestroyCard, maxSize: 10);
+        if (cardManager == null) this.transform.GetComponent<CardManager>();
     }
 
     GameCard CreateCard()
@@ -32,16 +33,15 @@ public class CardPoolManager : MonoBehaviour
     private void OnGetCard(GameCard card)
     {
         //카드의 순번을 할당한다.
-        int cardIdx = activeCardCount;
+        int cardIdx = cardManager.GetActiveCardCount();
         card.dragDrop.Setting(cardCanvas, parent, cardIdx);
         card.gameObject.SetActive(true);
-        activeCardCount++;
     }
 
     private void OnReleaseCard(GameCard card)
     {
         card.gameObject.SetActive(false);
-        activeCardCount--;
+        cardManager.OnReleseCard();
     }
 
     private void OnDestroyCard(GameCard card)

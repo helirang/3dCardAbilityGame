@@ -82,6 +82,16 @@ public class CardManager : MonoBehaviour
         }
     }
 
+    public int GetActiveCardCount()
+    {
+        return runtimeCardCount;
+    }
+
+    public void OnReleseCard()
+    {
+        runtimeCardCount--;
+    }
+
     public void OnGameState(EGameState gameState)
     {
         switch (gameState)
