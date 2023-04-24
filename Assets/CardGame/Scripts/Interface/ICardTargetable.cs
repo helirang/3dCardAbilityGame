@@ -16,12 +16,6 @@ public interface ICardTargetable
     public void HPControl(int value);
 
     /// <summary>
-    /// 매개변수인 어빌리티를 저장하게 구현할 것.
-    /// </summary>
-    /// <param name="ability"></param>
-    public void AbilityEquip(Ability_Origin ability);
-
-    /// <summary>
     /// 대상이 가진 TeamNum을 반환하도록 구현할 것.
     /// </summary>
     /// <returns></returns>

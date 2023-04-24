@@ -65,7 +65,7 @@ public class CardManager : MonoBehaviour
             int randNum = Random.Range(0, cardList.Count);
             var cardData = cardList[randNum];
             var card = cardPoolManager.pool.Get();
-            card.Setting(cardData,this);
+            card.Setting(cardData,this,cardPoolManager.pool);
 
             runtimeCardCount++;
             if (runtimeCardCount >= maxCard) break;

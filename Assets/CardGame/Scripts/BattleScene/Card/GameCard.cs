@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Pool;
 using TMPro;
 
 [RequireComponent(typeof(DragDrop))]
@@ -13,6 +14,9 @@ public class GameCard : MonoBehaviour
     [SerializeField] TextMeshProUGUI abilityTMP;
     [SerializeField] TextMeshProUGUI costTMP;
     public DragDrop dragDrop;
+
+    IObjectPool<GameCard> cardPool;
+
     //@todo 결합을 해지하는게 좋은 것인가 고민이 든다.
     CardManager cardManager;
 
@@ -23,10 +27,11 @@ public class GameCard : MonoBehaviour
         if (dragDrop == null) dragDrop = this.GetComponent<DragDrop>();
     }
 
-    public void Setting(SOCard data, CardManager cardManager)
+    public void Setting(SOCard data, CardManager cardManager, IObjectPool<GameCard> pool)
     {
         this.cardManager = cardManager;
         this.cardData = data;
+        this.cardPool = pool;
         itemImage.sprite = cardData.sprite;
         abilityTMP.text = cardData.GetDesc();
         costTMP.text = cardData.cost.ToString();
@@ -57,6 +62,11 @@ public class GameCard : MonoBehaviour
     bool TeamCheck(ETeamNum targetTeam)
     {
         return this.cardData.targetTeam == targetTeam;
+    }
+
+    public void ReleaseCard()
+    {
+        cardPool.Release(this);
     }
 
     public bool CostCheck()

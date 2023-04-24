@@ -25,7 +25,6 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
 
     [Header("Ability")]
     [SerializeField] Ability_DropSlot abilityDropSlot;
-    List<Ability_Origin> abilityList = new List<Ability_Origin>();
 
     List<CardCharacterController> enemyList;
     List<CardCharacterController> teamList;
@@ -152,11 +151,7 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
     /// </summary>
     public void ActionStart()
     {
-        if(abilityList?.Count > 0)
-        {
-            foreach (var ability in abilityList)
-                ability.Active(this);
-        }
+        //@todo 캐릭터 버프 및 광역 스킬 활성화 시, 코드 넣기
 
         if(enemyList.Count > 0)
         {
@@ -227,7 +222,6 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
 
     private void OnDestroy()
     {
-        abilityList.Clear();
         EventUnBind();
         ActionEndEvent = null;
         DeadEvent = null;
@@ -245,11 +239,6 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
             health.Heal(value);
         else
             health.Hit(Mathf.Abs(value));
-    }
-
-    public void AbilityEquip(Ability_Origin ability)
-    {
-        abilityList.Add(ability);
     }
 
     public ETeamNum GetTeamNum()

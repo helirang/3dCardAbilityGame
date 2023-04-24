@@ -20,7 +20,6 @@ public class DragDrop : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHan
 
     [Header("적용 체크 및 객체 관리 셋팅")]
     GameCard gameCard;
-    IObjectPool<GameCard> cardPool;
 
     private void Awake()
     {
@@ -29,12 +28,10 @@ public class DragDrop : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHan
         this.gameCard = this.GetComponent<GameCard>();
     }
 
-    public void Setting(Canvas originCanvas, Transform parent, IObjectPool<GameCard> pool,
-        int aliveCardNum)
+    public void Setting(Canvas originCanvas, Transform parent, int aliveCardNum)
     {
         this.originCanvas = originCanvas;
         this.parent = parent;
-        this.cardPool = pool;
         this.transform.SetSiblingIndex(aliveCardNum);
     }
 
@@ -85,7 +82,7 @@ public class DragDrop : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHan
         if (isActive)
         {
             //카드 비활성화
-            cardPool.Release(this.gameCard);
+            this.gameCard.ReleaseCard();
         }
         else
         {

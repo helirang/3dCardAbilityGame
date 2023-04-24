@@ -35,7 +35,7 @@ public class CardPoolManager : MonoBehaviour
     {
         //카드의 순번을 할당한다.
         int cardIdx = cardManager.GetAliveCardCount();
-        card.dragDrop.Setting(cardCanvas, parent, pool, cardIdx);
+        card.dragDrop.Setting(cardCanvas, parent, cardIdx);
 
         card.gameObject.SetActive(true);
     }
