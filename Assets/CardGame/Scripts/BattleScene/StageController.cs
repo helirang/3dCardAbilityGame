@@ -105,6 +105,14 @@ public class StageController : MonoBehaviour,IDataPipeInjection
     /// <returns> 게임 진행 중 == True </returns>
     void OnCharacterDead(int spawnID,ETeamNum teamNum)
     {
+        if (!AliveCheck(enemyBySpawnID))
+        {
+            stageDataPipe.GameClear();
+        }
+        else if (!AliveCheck(playerBySpawnID))
+        {
+            stageDataPipe.GameOver();
+        }
     }
 
     /// <summary>
