@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-[RequireComponent(typeof(CardPoolManager))]
+[RequireComponent(typeof(CardPoolManager),typeof(ParticlePoolManager))]
 public class CardManager : MonoBehaviour
 {
     [Header("셋팅")]
     [Tooltip("카드 생성 및 비활성 관리 스크립트")]
     [SerializeField] CardPoolManager cardPoolManager;
+    [SerializeField] ParticlePoolManager particlePoolManager;
     [Tooltip("잔여 마나 표시 UI")]
     [SerializeField] TextMeshProUGUI manaTMP;
     [Tooltip("턴 시작 시, 카드 접근 차단 이미지")]
@@ -34,7 +35,7 @@ public class CardManager : MonoBehaviour
     private void Awake()
     {
         if (cardPoolManager == null) this.GetComponent<CardPoolManager>();
-
+        if (particlePoolManager == null) this.GetComponent<ParticlePoolManager>();
         SetMana(startMana);
         blockImg.SetActive(false);
     }
@@ -46,10 +47,19 @@ public class CardManager : MonoBehaviour
 
         foreach (var data in cardList)
         {
-            CustomDebugger.Debug(LogType.Log, $"소유한 카드 : {data.name}");
+            if (data.ability.particle != null)
+            {
+                particlePoolManager.MakeParticlePool(data.ability.particle);
+                CustomDebugger.Debug(LogType.Log, $"소유한 카드 : {data.name}");
+            }
         }
         //cardList의 데이터에 기반하여 카드 생성
         MakeCard(startCard);
+    }
+
+    public void InvokeParticle(int id, Vector3 position)
+    {
+        particlePoolManager.InvokeParticle(id, position);
     }
 
     /// <summary>

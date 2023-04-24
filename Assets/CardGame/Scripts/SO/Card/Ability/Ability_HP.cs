@@ -6,7 +6,6 @@ using UnityEngine;
 public class Ability_HP : Ability_Origin
 {
     [SerializeField] int value = 0;
-
     public override void Active(ICardTargetable target)
     {
         target.HPControl(value);

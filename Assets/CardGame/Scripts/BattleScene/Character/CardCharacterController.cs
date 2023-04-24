@@ -245,5 +245,10 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
     {
         return teamNum;
     }
+
+    public Transform GetTargetTransform()
+    {
+        return this.transform;
+    }
     #endregion
 }

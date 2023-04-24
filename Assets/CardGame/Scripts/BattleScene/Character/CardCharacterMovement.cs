@@ -26,13 +26,22 @@ public class CardCharacterMovement : MonoBehaviour
         basePosition = this.transform.position;
         baseRotation = this.transform.rotation;
 
-        canvasTransform.rotation = Quaternion.Euler(30f, 0f, 0f);
+        CanvasRotation();
     }
     public void MoveBasePosition()
     {
         this.transform.position = basePosition;
         this.transform.rotation = baseRotation;
-        canvasTransform.rotation = Quaternion.Euler(30f, 0f, 0f);
+
+        CanvasRotation();
+    }
+
+    public void CanvasRotation()
+    {
+        //canvasTransform.rotation = Quaternion.identity;
+        //canvasTransform.rotation = Quaternion.Euler(30f, 0f, 0f);
+        canvasTransform.rotation = Quaternion.Euler(
+            Camera.main.transform.rotation.eulerAngles.x, 0f, 0f);
     }
 
     public void MoveStart(Vector3 target)
@@ -71,7 +80,7 @@ public class CardCharacterMovement : MonoBehaviour
                 isArrive = true; //While문 해제
             }
 
-            canvasTransform.rotation = Quaternion.Euler(30f, 0f, 0f);
+            CanvasRotation();
             myRigidbody.velocity = Vector3.zero;
             myRigidbody.angularVelocity = Vector3.zero;
 

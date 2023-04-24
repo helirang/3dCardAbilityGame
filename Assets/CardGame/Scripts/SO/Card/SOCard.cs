@@ -11,7 +11,6 @@ public class SOCard : ScriptableObject
 
     public AssetReferenceAbility abilityAsset;
     public AsyncOperationHandle<Ability_Origin> abilityOperation;
-
     [System.NonSerialized] public Ability_Origin ability;
     public ETeamNum targetTeam = ETeamNum.User;
     public int cost = 0;

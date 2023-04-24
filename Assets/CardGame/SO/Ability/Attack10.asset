@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7204a73531cb8847b3bca69a5eced9e, type: 3}
   m_Name: Attack10
   m_EditorClassIdentifier: 
-  desc: "10 \uB370\uBBF8\uC9C0 \uACF5\uACA9 "
   isDirectAbility: 1
+  particle: {fileID: 100000, guid: 756d99540142b5e4a8d174e18a6310d9, type: 3}
   value: -10

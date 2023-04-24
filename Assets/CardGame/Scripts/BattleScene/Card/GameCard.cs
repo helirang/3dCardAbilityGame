@@ -44,6 +44,8 @@ public class GameCard : MonoBehaviour
         if (TeamCheck(target.GetTeamNum()))
         {
             cardManager.SetMana(-cardData.cost);
+            cardManager.InvokeParticle(cardData.ability.particle.GetInstanceID(),
+                target.GetTargetTransform().position);
             cardData.ability.Active(target);
             isActive = true;
         }

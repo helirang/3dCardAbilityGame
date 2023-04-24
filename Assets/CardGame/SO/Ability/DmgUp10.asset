@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ffce9d67412eb24999534d3bce7c630, type: 3}
   m_Name: DmgUp10
   m_EditorClassIdentifier: 
-  desc: "\uB370\uBBF8\uC9C0 +10"
-  targetTeam: 0
   isDirectAbility: 1
+  particle: {fileID: 100000, guid: ec1985d26ca3e8c4aaec496371759e3a, type: 3}
   damageValue: 10

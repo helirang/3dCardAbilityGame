@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public interface ICardTargetable
 {
@@ -20,4 +21,6 @@ public interface ICardTargetable
     /// </summary>
     /// <returns></returns>
     public ETeamNum GetTeamNum();
+
+    public Transform GetTargetTransform();
 }

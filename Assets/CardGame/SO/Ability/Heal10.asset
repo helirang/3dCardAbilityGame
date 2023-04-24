@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7204a73531cb8847b3bca69a5eced9e, type: 3}
   m_Name: Heal10
   m_EditorClassIdentifier: 
-  desc: "HP 10 \uD68C\uBCF5"
   isDirectAbility: 1
+  particle: {fileID: 100000, guid: 2ab013960e30cc549893d40425d0d836, type: 3}
   value: 10
