@@ -20,6 +20,7 @@ public class ParticlePoolManager : MonoBehaviour
         gameObjToID.Add(id, obj);
 
         GameObject emptyObj = new GameObject($"{id} : PariclePool");
+        emptyObj.transform.parent = this.transform;
         ParticleObjPool particleObjPool = emptyObj.AddComponent<ParticleObjPool>();
         particleObjPool.particleObj = obj;
         poolToID.Add(id, particleObjPool);

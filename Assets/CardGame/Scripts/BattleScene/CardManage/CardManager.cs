@@ -82,20 +82,6 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public void ReleaseCard()
-    {
-        runtimeCardCount--;
-    }
-
-    /// <summary>
-    /// 현재 활성화되어 있는 카드의 수를 반환
-    /// </summary>
-    /// <returns></returns>
-    public int GetAliveCardCount()
-    {
-        return runtimeCardCount;
-    }
-
     public void OnGameState(EGameState gameState)
     {
         switch (gameState)
