@@ -36,7 +36,6 @@ public class CardPoolManager : MonoBehaviour
         card.dragDrop.Setting(cardCanvas, parent, cardIdx);
         card.gameObject.SetActive(true);
         activeCardCount++;
-        Debug.Log(activeCardCount);
     }
 
     private void OnReleaseCard(GameCard card)
