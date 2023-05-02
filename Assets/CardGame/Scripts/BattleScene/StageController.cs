@@ -10,18 +10,12 @@ public class StageController : MonoBehaviour,IDataPipeInjection
     [SerializeField] SOStageDataPipe stageDataPipe;
 
     [Header("Users")]
-    [SerializeField] GameObject userPrefab;
+    [SerializeField] SOCardCharacter userCardCharacter;
     [SerializeField] Transform userSpawnpoint;
-    [SerializeField] int userHp = 100;
-    [SerializeField] int userDmg = 10;
-    [SerializeField] string userName = "";
 
     [Header("Enemys")]
-    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] SOCardCharacter enemyCardCharacter;
     [SerializeField] Transform enemySpawnpoint;
-    [SerializeField] int enemyHp = 500;
-    [SerializeField] int enemyDmg = 10;
-    [SerializeField] string enemyNmae = "";
 
     EGameState gameState;
     [Header("게임 상태를 수신 받는 관리자")]
@@ -63,8 +57,8 @@ public class StageController : MonoBehaviour,IDataPipeInjection
     private void Start()
     {
         //@todo 몬스터 데이터 SO로 만들기
-        Spawn(ETeamNum.User, userName, userHp, userDmg);
-        Spawn(ETeamNum.Enemy, enemyNmae, enemyHp, enemyDmg);
+        Spawn(ETeamNum.User);
+        Spawn(ETeamNum.Enemy);
     }
 
     public void SetDatapipe(SOStageDataPipe dataPipe)
@@ -126,31 +120,34 @@ public class StageController : MonoBehaviour,IDataPipeInjection
     }
     #endregion
 
-    void Spawn(ETeamNum teamNum, string characterName, int hp ,int damage)
+    void Spawn(ETeamNum teamNum)
     {
         GameObject spawnObj = null;
-        CardCharacterController character = null;
+        CardCharacterController characterController = null;
+        SOCardCharacter cardCharacter = null;
 
         switch (teamNum)
         {
             case ETeamNum.User:
-                spawnObj = Instantiate(userPrefab, userSpawnpoint);
-                character = spawnObj.GetComponent<CardCharacterController>();
-                playerBySpawnID.Add(spawnID, character);
+                cardCharacter = userCardCharacter;
+                spawnObj = Instantiate(cardCharacter.character, userSpawnpoint);
+                characterController = spawnObj.GetComponent<CardCharacterController>();
+                playerBySpawnID.Add(spawnID, characterController);
                 break;
             case ETeamNum.Enemy:
-                spawnObj = Instantiate(enemyPrefab, enemySpawnpoint);
-                character = spawnObj.GetComponent<CardCharacterController>();
-                enemyBySpawnID.Add(spawnID, character);
+                cardCharacter = enemyCardCharacter;
+                spawnObj = Instantiate(cardCharacter.character, enemySpawnpoint);
+                characterController = spawnObj.GetComponent<CardCharacterController>();
+                enemyBySpawnID.Add(spawnID, characterController);
                 break;
         }
 
-        StateChangeEvent += character.OnGameState;
-        CharacterListUpdateEvent += character.OnTargetsChange;
-        character.DeadEvent += OnCharacterDead;
-        character.ActionEndEvent += OnActionEnd;
+        StateChangeEvent += characterController.OnGameState;
+        CharacterListUpdateEvent += characterController.OnTargetsChange;
+        characterController.DeadEvent += OnCharacterDead;
+        characterController.ActionEndEvent += OnActionEnd;
 
-        character.Setting(spawnID, teamNum, hp, characterName, damage);
+        characterController.Setting(spawnID,teamNum,cardCharacter.name, cardCharacter.stats);
         spawnID++;
     }
 

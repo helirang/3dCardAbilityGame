@@ -906,6 +906,7 @@ GameObject:
   - component: {fileID: 3255351539808028613}
   - component: {fileID: 6089215421325373399}
   - component: {fileID: 8959724571916168749}
+  - component: {fileID: 6371834738784773500}
   m_Layer: 9
   m_Name: WorldCanvas
   m_TagString: Untagged
@@ -1047,6 +1048,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3255351539808028615}
   m_CullTransparentMesh: 1
+--- !u!114 &6371834738784773500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3255351539808028615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6e077097f58754fb9045027a8f26f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardCharacter: {fileID: 3255351540148373829}
 --- !u!1 &3255351539857719265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,7 +1584,6 @@ MonoBehaviour:
   teamNum: 1
   animController: {fileID: 3255351540148373691}
   abilityDropSlot: {fileID: 6089215421325373399}
-  baseDamage: 10
 --- !u!114 &3255351540148373689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1585,8 +1598,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleLayer: {fileID: 11400000, guid: 8106e43a583b8e5429407b5aade28329, type: 2}
   hpSlider: {fileID: 3255351540427438682}
-  baseHp: 100
-  runtimeHp: 100
   pool: {fileID: 3255351539808028474}
 --- !u!95 &3255351540148373692
 Animator:

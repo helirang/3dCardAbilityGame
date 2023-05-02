@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d891d72cec7febb498fccb8e43e7162a, type: 3}
+  m_Name: TurtleShell_Enemy
+  m_EditorClassIdentifier: 
+  stats:
+    baseDamage: 10
+    buffDamage: 0
+    baseHp: 200
+    CurrentHp: 0
+  character: {fileID: 3255351540148373828, guid: f2106f67cade24a4a8990da0a1d24f35,
+    type: 3}

@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
+public struct CardCharacterStats
+{
+    public int baseDamage;
+    public int buffDamage;
+    public int baseHp;
+}
+
 [RequireComponent(typeof(AnimController), typeof(Health))]
 [RequireComponent(typeof(CardCharacterMovement))]
 public class CardCharacterController : MonoBehaviour,ICardTargetable
@@ -29,10 +37,7 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
     List<CardCharacterController> enemyList;
     List<CardCharacterController> teamList;
     int spawnID;
-
-    //테스트용 SerializeField 선언 차후 지우기
-    [SerializeField] int baseDamage = 10;
-    int buffDamage = 0;
+    CardCharacterStats stats;
     bool isAlive = true;
 
     public delegate void EnemyDeadDel(int spawnID, ETeamNum teamNum);
@@ -64,19 +69,19 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
         abilityDropSlot.Setting(this);
     }
 
-    public void Setting(int spawnID, ETeamNum teamNum, int hp,
-        string characterName,int damage)
+    public void Setting(int spawnID, ETeamNum teamNum,string characterName, 
+        CardCharacterStats stats)
     {
         this.spawnID = spawnID;
         this.teamNum = teamNum;
+        this.stats = stats;
 
         //hp 셋팅
         health.SetTeamNum(teamNum);
-        health.SetHP(hp);
+        health.SetHP(stats.baseHp);
 
         //weapon 셋팅
         combat.Setting(teamNum);
-        baseDamage = damage;
 
         //카드 드롭 슬롯 활성화
         abilityDropSlot.gameObject.SetActive(true);
@@ -126,7 +131,7 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
                 break;
             case EGameState.턴종료:
                 movement.MoveBasePosition();
-                buffDamage = 0; //@todo 연속된 턴 버프도 생각해보기
+                stats.buffDamage = 0; //@todo 연속된 턴 버프도 생각해보기
                 break;
         }
     }
@@ -181,7 +186,7 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
     void Attack()
     {
         //데미지 할당
-        combat.DamageSet(baseDamage+buffDamage);
+        combat.DamageSet(stats.baseDamage+stats.buffDamage);
 
         //공격 애니메이션 실행 및 콜백 함수 전달
         animController.Attack(
@@ -230,7 +235,7 @@ public class CardCharacterController : MonoBehaviour,ICardTargetable
     #region ICardTargetable 인터페이스 구현
     public void DamageControl(int value)
     {
-        buffDamage += value;
+        stats.buffDamage += value;
     }
 
     public void HPControl(int value)
